@@ -31,7 +31,7 @@
       const type = types[0]['type']['name']
 
       pokemons.innerHTML += `
-        <div class="pokemon" style="background-color: #eaeaea">
+        <div class="pokemon type-${type}">
           <p>${id}: ${name}</p>
           <img src="${sprite}" alt="image" />
           <p>type: ${type}</p>

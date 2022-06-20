@@ -56,3 +56,24 @@ button:disabled {
   border-radius: 0.5rem;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 }
+
+.type-normal { background-color: #ede3e3; }
+.type-fighting { background-color: #d98787; }
+.type-flying { background-color: #a5e3ef; }
+.type-poison { background-color: #bf72de; }
+.type-ground { background-color: #aa8a72; }
+.type-rock { background-color: #959595; }
+.type-bug { background-color: #b2d4a5; }
+.type-ghost { background-color: #c499cf; }
+.type-steel { background-color: #dbdbdb; }
+.type-fire { background-color: #e45757; }
+.type-water { background-color: #7e97e8; }
+.type-grass { background-color: #5cdc69; }
+.type-electric { background-color: #e5f13a; }
+.type-psychic { background-color: #ded971; }
+.type-ice { background-color: #4be9f4; }
+.type-dragon { background-color: #a077e0; }
+.type-dark { background-color: #828282; }
+.type-fairy { background-color: #efbae3; }
+.type-unknown { background-color: #000000; color: #fff; }
+.type-shadow { background-color: #454343; color: #fff; }
