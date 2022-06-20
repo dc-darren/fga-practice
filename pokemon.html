@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fetch Pokemon API</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Get Pokemons!</h1>
+  <button id="fetchButton">Get!</button>
+  <div id="pokemons"></div>
+
+  <script>
+    const button = document.getElementById('fetchButton')
+    const pokemons = document.getElementById('pokemons')
+
+    const fetchData = async (url) => {
+      console.log(url)
+      const response = await fetch(url, {method: "GET"})
+
+      const json = await response.json()
+      return json
+    }
+
+    const fetchAndPrintPokemon = async (url) => {
+      const pokemon = await fetchData(url)
+      const { id, name, sprites, types } = pokemon
+      const sprite = sprites['front_default']
+      const type = types[0]['type']['name']
+
+      pokemons.innerHTML += `
+        <div class="pokemon" style="background-color: #eaeaea">
+          <p>${id}: ${name}</p>
+          <img src="${sprite}" alt="image" />
+          <p>type: ${type}</p>
+        </div>
+      `
+    }
+
+    const fetchPokemons = async () => {
+      const data = await fetchData("https://pokeapi.co/api/v2/pokemon?limit=30")
+      Promise.all(data.results.map(result => {
+        fetchAndPrintPokemon(result.url)
+      }))
+      button.removeEventListener('click', fetchPokemons)
+      button.innerHTML = 'Fetched!'
+      button.disabled = true
+    }
+
+    button.addEventListener('click', fetchPokemons)
+  </script>
+</body>
+</html>
