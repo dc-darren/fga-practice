@@ -9,12 +9,15 @@
 </head>
 <body>
   <h1>Get Pokemons!</h1>
-  <button id="fetchButton">Get!</button>
   <div id="pokemons"></div>
+  <button id="fetchButton">Get!</button>
 
   <script>
     const button = document.getElementById('fetchButton')
+    const mybutton = document.getElementById('fetchButton')
     const pokemons = document.getElementById('pokemons')
+    const limit = 30
+    let offset = 0
 
     const fetchData = async (url) => {
       console.log(url)
@@ -32,21 +35,24 @@
 
       pokemons.innerHTML += `
         <div class="pokemon type-${type}">
-          <p>${id}: ${name}</p>
+          <p>${id}: <span class="capitalize">${name}</span></p>
           <img src="${sprite}" alt="image" />
-          <p>type: ${type}</p>
+          <p>Type: <span class="capitalize">${type}</span></p>
         </div>
       `
     }
 
-    const fetchPokemons = async () => {
-      const data = await fetchData("https://pokeapi.co/api/v2/pokemon?limit=30")
+    const fetchPokemons = async (url) => {
+      const data = await fetchData(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`)
       Promise.all(data.results.map(result => {
         fetchAndPrintPokemon(result.url)
       }))
-      button.removeEventListener('click', fetchPokemons)
-      button.innerHTML = 'Fetched!'
-      button.disabled = true
+      // button.removeEventListener('click', fetchPokemons)
+      // button.innerHTML = 'Fetched!'
+      // button.disabled = true
+      button.style.width = '100%'
+      button.innerHTML = 'Load more'
+      offset += limit
     }
 
     button.addEventListener('click', fetchPokemons)
